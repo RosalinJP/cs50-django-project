@@ -1,0 +1,6 @@
+{%extends encyclopedia.layout%}
+{% block search_form%}
+<form action="{% url 'search' %}">
+    <input class="search" type="text" name="q" placeholder="Search Encyclopedia">
+</form>
+{% endblock %}
