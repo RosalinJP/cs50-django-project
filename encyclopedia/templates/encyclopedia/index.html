@@ -4,11 +4,16 @@
 Encyclopedia
 {% endblock %}
 
+
+
 {% block body %}
 <h1>All Pages</h1>
-
+if message:
+{{message}}
 <ul>
     {% for entry in entries %}
+    <!-- the 1st 'entry' is the name of url, 
+     2nd entry is to fill argument<str:title> -->
     <a href="{% url 'entry' entry %}">
         <li>{{ entry }}</li>
     </a>
