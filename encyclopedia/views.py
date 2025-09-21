@@ -54,6 +54,11 @@ def new(request):
     if request.method=="POST":
         title = request.POST.get("title","").strip()
         content = request.POST.get("markdown_content")
+        entries=util.list_entries()
+        if title.lower() in [entry.lower() for entry in entries] :
+            return render(request,"encyclopedia/new.html",{
+                "message":"Error:Title already exist in directory"
+            })
         util.save_entry(title,content)
         return redirect("entry",title=title)
     return render(request,"encyclopedia/new.html")   
