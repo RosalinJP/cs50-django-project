@@ -5,6 +5,12 @@ from . import util
 # add markdown to change md to html
 import markdown2
 
+from django import forms
+
+class NewPageForm(forms.Form): 
+    title = forms.CharField(label="Page Title")
+
+
 def index(request):
     return render(request, "encyclopedia/index.html", {
         "entries": util.list_entries()
@@ -41,6 +47,16 @@ def search(request):
         return render(request,"encyclopedia/index.html",{
             "message":"no result found"
         })
+
+
+def new(request):
+    
+    if request.method=="POST":
+        title = request.POST.get("title","").strip()
+        content = request.POST.get("markdown_content")
+        util.save_entry(title,content)
+        return redirect("entry",title=title)
+    return render(request,"encyclopedia/new.html")   
     
 
 
