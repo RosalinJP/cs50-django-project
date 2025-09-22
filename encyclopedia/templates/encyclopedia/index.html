@@ -8,8 +8,9 @@ Encyclopedia
 
 {% block body %}
 <h1>All Pages</h1>
-if message:
+{% if message %}
 {{message}}
+{% endif %}
 <ul>
     {% for entry in entries %}
     <!-- the 1st 'entry' is the name of url, 

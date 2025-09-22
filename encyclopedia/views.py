@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from django.urls import reverse
+from random import choice
 
 from . import util
 # add markdown to change md to html
@@ -77,3 +78,9 @@ def save(request):
         new_content=request.POST.get("content")
         util.save_entry(title,new_content)
         return redirect("entry",title=title)
+
+def random(request):
+    entries=util.list_entries()
+    selected=choice(entries)
+    return entry(request,selected)
+
