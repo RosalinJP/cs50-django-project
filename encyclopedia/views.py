@@ -64,10 +64,16 @@ def new(request):
     return render(request,"encyclopedia/new.html")   
 
 def edit (request):
-    title=request.GET.get("title")
-    # content=request.get.GET("content")
-    content=util.get_entry(title)
-    return render (request,"encyclopedia/edit.html",{
-        "title":title,
-        "content":content
-    })
+    if request.method == "GET":
+        title=request.GET.get("title")
+        content=util.get_entry(title)
+        return render (request,"encyclopedia/edit.html",{
+            "title":title,
+            "content":content
+         })
+def save(request):
+    if request.method=="POST":
+        title=request.POST.get("title")
+        new_content=request.POST.get("content")
+        util.save_entry(title,new_content)
+        return redirect("entry",title=title)
