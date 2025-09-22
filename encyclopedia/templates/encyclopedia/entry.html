@@ -9,6 +9,12 @@
 
 <body>
     {{html_content|safe}}
+
+    <form action="{% url 'edit' %}">
+        <input type="hidden" name="title" value="{{title}}">
+        <input type="Submit" name="edit" value="Edit">
+
+    </form>
 </body>
 
 </html>
